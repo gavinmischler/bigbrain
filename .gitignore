@@ -24,3 +24,7 @@ complete_features.csv
 .DS_Store
 .DS_Store?
 ._*
+
+# Jupyter Notebooks #
+#####################
+*.ipynb
