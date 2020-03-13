@@ -51,17 +51,15 @@ class AI():
 
         # loop through list of supervised learning classification methods
         if self.model_type_ == "classification":
-            models = [
-                KNeighborsClassifier(3),
-                SVC(kernel="linear", C=0.025),
-                SVC(gamma=2, C=1),
-                GaussianProcessClassifier(1.0 * RBF(1.0)),
-                DecisionTreeClassifier(max_depth=5),
-                RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
-                MLPClassifier(alpha=1, max_iter=1000),
-                AdaBoostClassifier(),
-                GaussianNB(),
-                QuadraticDiscriminantAnalysis()]
+            models = [KNeighborsClassifier(3),
+                SVC(kernel="linear", C=0.025),
+                SVC(gamma=2, C=1),GaussianProcessClassifier(1.0 * RBF(1.0)),
+                DecisionTreeClassifier(max_depth=5),
+                RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1), 
+                MLPClassifier(alpha=1, max_iter=1000),
+                AdaBoostClassifier(),
+                GaussianNB(),
+                QuadraticDiscriminantAnalysis()]
 
         # for each model, fit on training data then predict on testing data
         best_score = 0
