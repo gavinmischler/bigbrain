@@ -35,7 +35,7 @@ With this package, you can easily create regression or classification models for
 ####### Classification #######
 >>> machine = AI(model_type='classification')
 >>> machine.learn(X_train, y_train)
-	"My big brain has learned everything."
+"My big brain has learned everything."
 >>> predictions = machine.go(X_test)
 
 ####### Regression #######
