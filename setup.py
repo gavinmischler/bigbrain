@@ -17,9 +17,9 @@ MINIMUM_PYTHON_VERSION = 3, 6  # Minimum of Python 3.6
 with open("requirements.txt", "r") as f:
     REQUIRED_PACKAGES = f.read()
 
-# Find mvlearn version.
+# Find bigbrain version.
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
-for line in open(os.path.join(PROJECT_PATH, "mvlearn", "__init__.py")):
+for line in open(os.path.join(PROJECT_PATH, "bigbrain", "__init__.py")):
     if line.startswith("__version__ = "):
         VERSION = line.strip().split()[2][1:-1]
 
