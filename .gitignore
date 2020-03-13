@@ -28,3 +28,4 @@ complete_features.csv
 # Jupyter Notebooks #
 #####################
 *.ipynb
+.ipynb_checkpoints/
