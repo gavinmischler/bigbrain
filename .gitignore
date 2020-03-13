@@ -34,3 +34,7 @@ complete_features.csv
 #########################################
 __pycache__/
 
+# Directories #
+###############
+dist/
+*.egg-info/

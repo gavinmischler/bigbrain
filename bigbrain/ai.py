@@ -44,7 +44,6 @@ class AI():
 
         Returns
         -------
-        fitted_model : returns an instance of self
         """
 
         # split into train/validation (default 75/25)
@@ -83,8 +82,7 @@ class AI():
 
         if self.verbose_:
             print("Best model: %s" % self.model_)
-            print("Best model score: %0.3f" % best_score) 
-
+            print("Best model score: %0.3f" % best_score)
 
     def go(self, X):
         """
