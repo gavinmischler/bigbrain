@@ -19,7 +19,7 @@ bigbrain wraps [scikit-learn](https://github.com/scikit-learn/scikit-learn) to t
 
 ### Installation
 
-bigbrain can be installed using pypi, either from the [website], or from teh command line:
+bigbrain can be installed using pypi, either from the [website], or from the command line:
 
 ```sh
 $ pip install bigbrain
