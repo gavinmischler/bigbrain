@@ -24,11 +24,12 @@ class AI():
     Attributes
     ----------
     """
-    def __init__(self, model_type, test_size = None, seed=None):
+    def __init__(self, model_type="classification", test_size=None, seed=None, verbose=False):
         self.model_ = None
         self.model_type_ = model_type
         self.test_size_ = test_size
         self.seed_ = seed
+        self.verbose_ = verbose
 
     def learn(self, X, y):
         """
@@ -79,6 +80,11 @@ class AI():
 
         # done learning
         print("My big brain has learned everything.")
+
+        if self.verbose_:
+            print("Best model: %s" % self.model_)
+            print("Best model score: %0.3f" % best_score) 
+
 
     def go(self, X):
         """
