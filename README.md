@@ -41,10 +41,10 @@ With this package, you can easily create regression or classification models for
 ...     X, y, test_size=0.3)
 >>> machine = AI(model_type='classification')
 >>> machine.learn(X_train, y_train)
-"My big brain has learned everything."
+	"My big brain has learned everything."
 >>> predictions = machine.go(X_test)
 >>> print(accuracy_score(y_test, predictions)
-"1.00"
+	"0.97"
 ####### Regression #######
 >>> X, y = load_boston(return_X_y=True)
 >>> X_train, X_test, y_train, y_test = train_test_split(
@@ -53,4 +53,5 @@ With this package, you can easily create regression or classification models for
 "My big brain has learned everything."
 >>> predictions = machine.go(X_test)
 >>> print(mean_squared_error(y_test, predictions)
+	"14.03"
 ```
