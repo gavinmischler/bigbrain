@@ -14,8 +14,8 @@ AUTHOR = (
 AUTHOR_EMAIL = "gavin.m.mischler@gmail.com"
 URL = "https://github.com/gmischl1/bigbrain"
 MINIMUM_PYTHON_VERSION = 3, 6  # Minimum of Python 3.6
-with open("requirements.txt", "r") as f:
-    REQUIRED_PACKAGES = f.read()
+# with open("requirements.txt", "r") as f:
+#     REQUIRED_PACKAGES = f.read()
 
 # Find bigbrain version.
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -40,7 +40,7 @@ setup(
     long_description_content_type="text/markdown",
     author=AUTHOR,
     author_email=AUTHOR_EMAIL,
-    install_requires=REQUIRED_PACKAGES,
+    install_requires=['numpy', 'scikit-learn'],
     url=URL,
     license="Apache License 2.0",
     classifiers=[
