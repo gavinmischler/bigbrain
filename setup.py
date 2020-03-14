@@ -40,7 +40,7 @@ setup(
     long_description_content_type="text/markdown",
     author=AUTHOR,
     author_email=AUTHOR_EMAIL,
-    install_requires=['numpy', 'scikit-learn'],
+    install_requires=["numpy","scikit-learn"],
     url=URL,
     license="Apache License 2.0",
     classifiers=[
