@@ -43,6 +43,7 @@ setup(
     install_requires=[
           'numpy',
           'scikit-learn',
+          'mvlearn'
       ],
     url=URL,
     license="Apache License 2.0",
