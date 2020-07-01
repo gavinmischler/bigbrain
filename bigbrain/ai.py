@@ -1,5 +1,8 @@
 # Artificial Intelligence is finally here
 
+import random
+import numpy as np
+
 # data modules
 from sklearn.model_selection import train_test_split
 
@@ -15,6 +18,11 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis
+from mvlearn.construct import random_subspace_method
+try:
+    from mvlearn.semi_supervised import CTClassifier
+except:
+    from mvlearn.cotraining import CTClassifier
 
 # regression modules
 from sklearn.neural_network import MLPRegressor
@@ -47,6 +55,7 @@ class AI():
         self.test_size_ = test_size
         self.seed_ = seed
         self.verbose_ = verbose
+        self.extra_info_ = {'random_state': None}
 
     def learn(self, X, y):
         """
@@ -84,6 +93,9 @@ class AI():
                 LinearDiscriminantAnalysis(),
                 QuadraticDiscriminantAnalysis()]
 
+            if len(np.unique(y)) == 2:
+                models.append(CTClassifier())
+
             best_score = 0
 
         else:
@@ -106,8 +118,25 @@ class AI():
         # for each model, fit on training data then predict on testing data
 
         for m in models:
-            m.fit(X_train, y_train)
-            y_pred = m.predict(X_test)
+
+            state_int = None
+
+            # check for multiview model
+            if hasattr(m, 'estimator1_') or hasattr(m, 'estimator1'):
+                state_int = np.random.randint(low=0, high=1e5)
+
+                np.random.seed(state_int)
+                random.seed(state_int)
+                Xs_train = random_subspace_method(X_train, n_features=0.7, n_views=2)
+                m.fit(Xs_train, y_train)
+
+                np.random.seed(state_int)
+                random.seed(state_int)
+                Xs_test = random_subspace_method(X_test, n_features=0.7, n_views=2)
+                y_pred = m.predict(Xs_test)
+            else:    
+                m.fit(X_train, y_train)
+                y_pred = m.predict(X_test)
 
             if self.model_type_ == "classification":
                 score = accuracy_score(y_test, y_pred)
@@ -117,6 +146,7 @@ class AI():
                     # set it as the best score and best model
                     best_score = score
                     self.model_ = m
+                    self.extra_info_['random_state'] = state_int
                 score_name = "accuracy score"
             else:
                 score = mean_squared_error(y_test, y_pred)
@@ -126,6 +156,7 @@ class AI():
                     # set it as the best score and best model
                     best_score = score
                     self.model_ = m
+                    self.extra_info_['random_state'] = state_int
                 score_name = "MSE"
 
         # grid search parameterss for best model and save
@@ -152,4 +183,11 @@ class AI():
             Predicted targets.
         """
 
-        return self.model_.predict(X)
+        if hasattr(self.model_, 'estimator1_') or hasattr(self.model_, 'estimator1'):
+            np.random.seed(self.extra_info_['random_state'])
+            random.seed(self.extra_info_['random_state'])
+            Xs = random_subspace_method(X, n_features=0.7, n_views=2)
+            return self.model_.predict(Xs)
+
+        else:
+            return self.model_.predict(X)
